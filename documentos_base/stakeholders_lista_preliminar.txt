@@ -1,0 +1,43 @@
+organizadores de eventos: inclui empresários e empresas de eventos
+precisam de:
+- planejamento e coordenação: cronogramas, alocação de espaços, equipes e recursos
+- inscrições e gestão de expositores: inscrever expositores, gerenciar seus dados, documentos e pagamentos
+- venda de ingressos:: gerenciamento de venda, distribuição e controle de acesso de visitantes
+- marketing e comunicação: divulgar o evento, enviar comunicados a expositores e visitantes
+- controle financeiro: monitorar receitas e despesas
+- análise de relatórios: obter dados sobre o desempenho do evento.
+
+expositores: incluindo restaurantes, chefes e cozinheiros independentes
+precisam de:
+- inscrição no sistema e envio de informações: candidatura, envio de cardápios, licenças e documentos
+- gerenciamento de perfil: acesso e atualização de dados
+- comunicação com a organização de eventos: recebimento de avisos e canais de comunicação e tirar dúvidas
+- gestão de cardápio, do estande e das vendas
+- visibilidade e divulgação na plataforma e nos estandes
+
+Visitantes: publico geral
+precisam de:
+- informações do evento, incluindo acesso a datas, horários, locais, expositores participantes e cardápios
+- compra de ingressos
+- navegação na feira: mapa interativo e informações sobre estandes
+- avaliações e feedback: dar feedback à feira e aos expositores
+
+Patrocinadores e Parceiros: incluem empresas e entidades que apoiarão as feiras financeiramente ou com logística.
+Precisam de:
+- Visibilidade e branding: exposição da marca no evento
+- acesso a dados: informações anonimizadas do público e alcance da feira
+- gerenciamento de parcerias: integrar promoções ou conteúdos patrocinados
+
+Equipe de apoio: funcionários, trabalhadores temporários e voluntários
+- coordenação de tarefas: comunicação com a equipe, gerenciamento de escalas e atribuição de funções
+- controle de acesso: validação de ingressos e credenciais
+- suporte aos expositores e visitantes: acesso a informações rápidas no local
+
+Órgãos reguladores e fiscalizadores:
+precisam de:
+- conformidade legal: garantir que as licenças e fiscalizações estejam garantidas
+
+
+
+
+
