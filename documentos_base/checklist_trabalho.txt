@@ -2,58 +2,65 @@
 - CRUD
 - associação: expositor -> lista produto
 
+Entidades Solicitadas:
+- feira
+	- nome -- OK
+	- descrição -- OK
+	- data inicio -- OK
+	- data termino -- OK
+	- local -- OK
+	- cidade -- OK
+	- estado -- OK
+- expositor
+	- nome -- OK
+	- descrição -- OK
+	- contato -- OK
+- produto
+	- nome -- OK
+	- descrição -- OK
+	- preco -- OK
+- ingresso
+	- nome de feira -- OK
+	- número de ingresso -- OK
+	- data -- OK
 
 Como usuário, faço:
 - listar feira
-	- nome
-	- descrição
-	- data inicio
-	- data termino
-	- local
-	- cidade
-	- estado
 - listar expositor em feira
-	- nome
-	- descrição
-	- contato
 - listar produto de expositor em feira
-	- nome
-	- descrição
-	- preco
 - ler dados feira
 - ler dados expositor em feira
 - ler dados produtos de expositor em feira
 
-- criar conta
-- autenticar-se
+- criar conta (USUÁRIO)
+- autenticar-se (USUÁRIO)
 
-- criar feira
-- editar feira
-- excluir feira
+- criar feira (ORGANIZADOR)
+- editar feira (ORGANIZADOR)
+- excluir feira (ORGANIZADOR)
 
-- criar expositor
-- editar expositor
-- excluir expositor
+- criar expositor (ORGANIZADOR/COLABORADOR)
+- editar expositor (ORGANIZADOR/COLABORADOR)
+- excluir expositor (ORGANIZADOR/COLABORADOR)
 
-- criar lista de produto
-- editar lista de produto
-- excluir lista de produto
+- criar lista de produto (EXPOSITOR)
+- editar lista de produto (EXPOSITOR)
+- excluir lista de produto (EXPOSITOR)
 
-- criar produto
-- editar produto
-- excluir produto
+(EXPOSITOR)
+- criar produto (EXPOSITOR)
+- editar produto (EXPOSITOR)
+- excluir produto (EXPOSITOR)
 
+()
 - criar ingresso
-- ler ingresso
+- ler ingresso	--	INGRESSO NÃO PODE SER EDITADO
 - excluir ingresso
 
 - ingresso permite acesso de feira na data de emissão
 
-- ingresso
-	- nome de feira
-	- número de ingresso
-	- data
-
 Regras impostas
 - registro de feira, expositor, produto ou ingresso só pode ser editado ou excluído por quem o criou
 - exclusão de registro só pode ser realizado se não houver registro associado a ele
+	--	INGRESSO NÃO PODE SER EDITADO
+	--  ingresso permite acesso de feira na data de emissão
