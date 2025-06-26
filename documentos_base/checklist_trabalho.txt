@@ -1,0 +1,59 @@
+### Banco de Dados ###
+- CRUD
+- associação: expositor -> lista produto
+
+
+Como usuário, faço:
+- listar feira
+	- nome
+	- descrição
+	- data inicio
+	- data termino
+	- local
+	- cidade
+	- estado
+- listar expositor em feira
+	- nome
+	- descrição
+	- contato
+- listar produto de expositor em feira
+	- nome
+	- descrição
+	- preco
+- ler dados feira
+- ler dados expositor em feira
+- ler dados produtos de expositor em feira
+
+- criar conta
+- autenticar-se
+
+- criar feira
+- editar feira
+- excluir feira
+
+- criar expositor
+- editar expositor
+- excluir expositor
+
+- criar lista de produto
+- editar lista de produto
+- excluir lista de produto
+
+- criar produto
+- editar produto
+- excluir produto
+
+- criar ingresso
+- ler ingresso
+- excluir ingresso
+
+- ingresso permite acesso de feira na data de emissão
+
+- ingresso
+	- nome de feira
+	- número de ingresso
+	- data
+
+Regras impostas
+- registro de feira, expositor, produto ou ingresso só pode ser editado ou excluído por quem o criou
+- exclusão de registro só pode ser realizado se não houver registro associado a ele
