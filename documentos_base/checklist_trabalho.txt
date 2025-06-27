@@ -25,41 +25,41 @@ Entidades Solicitadas:
 	- data -- OK
 
 Como usuário, faço:
-- listar feira
-- listar expositor em feira
-- listar produto de expositor em feira
-- ler dados feira
-- ler dados expositor em feira
-- ler dados produtos de expositor em feira
+- listar feira -- OK
+- listar expositor em feira -- OK
+- listar produto de expositor em feira -- OK
+- ler dados feira -- OK
+- ler dados expositor em feira -- OK
+- ler dados produtos de expositor em feira -- OK
 
 (USUÁRIO)
-- criar conta (USUÁRIO)
-- autenticar-se (USUÁRIO)
+- criar conta (USUÁRIO) -- OK
+- autenticar-se (USUÁRIO) -- OK
 
 (ORGANIZADOR)
-- criar feira (ORGANIZADOR)
-- editar feira (ORGANIZADOR)
-- excluir feira (ORGANIZADOR)
+- criar feira (ORGANIZADOR) -- OK
+- editar feira (ORGANIZADOR) -- OK
+- excluir feira (ORGANIZADOR) -- OK
 
 (ORGANIZADOR/COLABORADOR)
-- criar expositor (ORGANIZADOR/COLABORADOR)
-- editar expositor (ORGANIZADOR/COLABORADOR)
-- excluir expositor (ORGANIZADOR/COLABORADOR)
+- criar expositor (ORGANIZADOR/COLABORADOR) -- OK
+- editar expositor (ORGANIZADOR/COLABORADOR) -- OK
+- excluir expositor (ORGANIZADOR/COLABORADOR) -- OK
 
 (EXPOSITOR)
-- criar lista de produto (EXPOSITOR)
-- editar lista de produto (EXPOSITOR)
-- excluir lista de produto (EXPOSITOR)
+- criar lista de produto (EXPOSITOR) -- OK
+- editar lista de produto (EXPOSITOR) -- OK
+- excluir lista de produto (EXPOSITOR) -- OK
 
 (EXPOSITOR)
-- criar produto (EXPOSITOR)
-- editar produto (EXPOSITOR)
-- excluir produto (EXPOSITOR)
+- criar produto (EXPOSITOR) -- OK
+- editar produto (EXPOSITOR) -- OK
+- excluir produto (EXPOSITOR) -- OK
 
 ()
-- criar ingresso
-- ler ingresso	--	INGRESSO NÃO PODE SER EDITADO
-- excluir ingresso
+- criar ingresso -- OK
+- ler ingresso -- OK	--	INGRESSO NÃO PODE SER EDITADO
+- excluir ingresso -- OK
 
 - ingresso permite acesso de feira na data de emissão
 
@@ -70,3 +70,42 @@ Regras impostas
 	--	INGRESSO NÃO PODE SER EDITADO
 	--  ingresso permite acesso de feira na data de emissão
 	--  ingresso permite acesso de feira na data de emissão
+
+	4. INSTRUÇÕES
+
+KANBAN
+10. Prover descrição de propósito de cada coluna do quadro Kanban.
+12. Prover informação sobre cada cartão criado.
+
+SYSTEMWIDE REQUIREMENTS
+13. Especificação de requisito não funcional de prover informação sobre normas, padrões, métricas etc.
+14. Criar histórias de usuário adotando modelo (Como ….. Eu quero ….. Para …..).
+
+ARCHITECTURE
+15. Descrição da arquitetura do software deve prover informação sobre elementos, relacionamentos etc.
+16. Descrição da arquitetura do software deve informar impacto de ferramentas usadas (templates bibliotecas etc.).
+
+STORYBOARD
+17. Representar projeto de interface com o usuário por storyboard composto por wireframes.
+18. Constuir cada wireframe como esboço simples de tela.
+
+BANCO DE DADOS
+19. Representar projeto físico do banco de dados por diagrama e texto.
+20. Para cada tabela, informar nome, colunas, chaves, relacionamentos com outras tabelas etc.
+21. Para cada tabela prover descrição textual do seu propósito.
+
+PROTOTYPE
+22. Projetar e construir protótipo do sistema.
+
+VIDEO
+23. Fornecer vídeo que demonstre correto funcionamento do protótipo por meio de teste de sistema.
+24. Teste de sistema demonstrado no vídeo deve conter um cenário de sucesso para cada serviço provido.
+
+INFRASTRUCTURE
+25. Descrição da infraestrutura deve descrever hardware, software e serviços para sistema ser posto em produção.
+
+ARQUIVO ZIP
+26. Incluir todos os artefatos construídos em um arquivo zip e atribuir o nome ESW-A-B-C-D-E-F.ZIP ao arquivo.
+27. No nome do arquivo zip, A, B, C, D, E e F devem ser os números de matrícula dos autores do trabalho.
+28. Testar se o arquivo pode ser descompactado com sucesso e se não há vírus no mesmo.
+29. Enviar o arquivo dentro do prazo.
