@@ -32,17 +32,21 @@ Como usuário, faço:
 - ler dados expositor em feira
 - ler dados produtos de expositor em feira
 
+(USUÁRIO)
 - criar conta (USUÁRIO)
 - autenticar-se (USUÁRIO)
 
+(ORGANIZADOR)
 - criar feira (ORGANIZADOR)
 - editar feira (ORGANIZADOR)
 - excluir feira (ORGANIZADOR)
 
+(ORGANIZADOR/COLABORADOR)
 - criar expositor (ORGANIZADOR/COLABORADOR)
 - editar expositor (ORGANIZADOR/COLABORADOR)
 - excluir expositor (ORGANIZADOR/COLABORADOR)
 
+(EXPOSITOR)
 - criar lista de produto (EXPOSITOR)
 - editar lista de produto (EXPOSITOR)
 - excluir lista de produto (EXPOSITOR)
@@ -62,5 +66,7 @@ Como usuário, faço:
 Regras impostas
 - registro de feira, expositor, produto ou ingresso só pode ser editado ou excluído por quem o criou
 - exclusão de registro só pode ser realizado se não houver registro associado a ele
+- derivados de interpretação
 	--	INGRESSO NÃO PODE SER EDITADO
+	--  ingresso permite acesso de feira na data de emissão
 	--  ingresso permite acesso de feira na data de emissão
