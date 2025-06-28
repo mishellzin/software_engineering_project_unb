@@ -109,7 +109,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Produto` (
   `Expositor_Usuário_id_usuário` INT NOT NULL,
-  `nome` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
   `preco` DECIMAL(10,2) NOT NULL,
   `descricao` VARCHAR(250) NULL,
   INDEX `fk_Produto_Expositor1_idx` (`Expositor_Usuário_id_usuário` ASC) VISIBLE,
@@ -239,7 +239,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Lista_produto` (
   `Expositor_Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Expositor_Usuário_id_usuário`),
+  `id` INT NOT NULL,
+  `apelido` VARCHAR(45) NULL,
+  PRIMARY KEY (`Expositor_Usuário_id_usuário`, `id`),
   CONSTRAINT `fk_Lista_produto_Expositor1`
     FOREIGN KEY (`Expositor_Usuário_id_usuário`)
     REFERENCES `hubgourmet`.`Expositor` (`Usuário_id_usuário`)
