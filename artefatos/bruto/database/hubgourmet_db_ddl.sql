@@ -256,10 +256,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Lista_produto_has_Produto` (
   `Lista_produto_Expositor_Usuário_id_usuário` INT NOT NULL,
   `Produto_Expositor_Usuário_id_usuário` INT NOT NULL,
-  `Produto_nome` INT NOT NULL,
+  `Produto_nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Lista_produto_Expositor_Usuário_id_usuário`, `Produto_Expositor_Usuário_id_usuário`, `Produto_nome`),
-  INDEX `fk_Lista_produto_has_Produto_Produto1_idx` (`Produto_Expositor_Usuário_id_usuário` ASC, `Produto_nome` ASC) VISIBLE,
   INDEX `fk_Lista_produto_has_Produto_Lista_produto1_idx` (`Lista_produto_Expositor_Usuário_id_usuário` ASC) VISIBLE,
+  INDEX `fk_Lista_produto_has_Produto_Produto1_idx` (`Produto_Expositor_Usuário_id_usuário` ASC, `Produto_nome` ASC) VISIBLE,
   CONSTRAINT `fk_Lista_produto_has_Produto_Lista_produto1`
     FOREIGN KEY (`Lista_produto_Expositor_Usuário_id_usuário`)
     REFERENCES `hubgourmet`.`Lista_produto` (`Expositor_Usuário_id_usuário`)
