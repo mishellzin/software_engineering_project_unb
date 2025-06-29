@@ -18,12 +18,13 @@ CREATE SCHEMA IF NOT EXISTS `hubgourmet` DEFAULT CHARACTER SET utf8 COLLATE utf8
 USE `hubgourmet` ;
 
 -- -----------------------------------------------------
--- Table `hubgourmet`.`Usuário`
+-- Table `hubgourmet`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hubgourmet`.`Usuário` (
-  `id_usuário` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `hubgourmet`.`Usuario` (
+  `email` VARCHAR(45) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuário`))
+  `senha` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`email`))
 ENGINE = InnoDB;
 
 
@@ -31,14 +32,14 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Expositor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Expositor` (
-  `Usuário_id_usuário` INT NOT NULL,
+  `Usuario_email` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(250) NOT NULL,
   `contato` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  PRIMARY KEY (`Usuario_email`),
+  INDEX `fk_Expositor_Usuario1_idx` (`Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Expositor_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -48,12 +49,12 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Organizador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Organizador` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário0`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  INDEX `fk_Organizador_Usuario1_idx` (`Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Organizador_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -63,12 +64,11 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Colaborador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Colaborador` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário00`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  CONSTRAINT `fk_Colaborador_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -78,12 +78,11 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Fiscalizador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Fiscalizador` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário000`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  CONSTRAINT `fk_Fiscalizador_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -93,12 +92,11 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Parceiro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Parceiro` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário0000`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  CONSTRAINT `fk_Parceiro_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -108,15 +106,15 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Produto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Produto` (
-  `Expositor_Usuário_id_usuário` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
+  `Expositor_Usuario_email` VARCHAR(45) NOT NULL,
   `preco` DECIMAL(10,2) NOT NULL,
   `descricao` VARCHAR(250) NULL,
-  INDEX `fk_Produto_Expositor1_idx` (`Expositor_Usuário_id_usuário` ASC) VISIBLE,
-  PRIMARY KEY (`Expositor_Usuário_id_usuário`, `nome`),
+  PRIMARY KEY (`nome`, `Expositor_Usuario_email`),
+  INDEX `fk_Produto_Expositor1_idx` (`Expositor_Usuario_email` ASC) VISIBLE,
   CONSTRAINT `fk_Produto_Expositor1`
-    FOREIGN KEY (`Expositor_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Expositor` (`Usuário_id_usuário`)
+    FOREIGN KEY (`Expositor_Usuario_email`)
+    REFERENCES `hubgourmet`.`Expositor` (`Usuario_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -172,24 +170,25 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Feira`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Feira` (
-  `Organizador_Usuário_id_usuário` INT NOT NULL,
   `nome` VARCHAR(65) NOT NULL,
+  `Organizador_Usuario_email` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(250) NULL,
   `data_inicio` DATE NULL,
   `data_termino` DATE NULL,
   `Local_id_local` INT NOT NULL,
   `Local_Cidade_nome_cidade` VARCHAR(45) NOT NULL,
   `Local_Cidade_Unidade_federacao_sigla` VARCHAR(2) NOT NULL,
-  PRIMARY KEY (`Organizador_Usuário_id_usuário`, `nome`),
+  PRIMARY KEY (`nome`, `Organizador_Usuario_email`),
   INDEX `fk_Feira_Local1_idx` (`Local_id_local` ASC, `Local_Cidade_nome_cidade` ASC, `Local_Cidade_Unidade_federacao_sigla` ASC) VISIBLE,
-  CONSTRAINT `fk_Feira_Organizador1`
-    FOREIGN KEY (`Organizador_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Organizador` (`Usuário_id_usuário`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_Feira_Organizador1_idx` (`Organizador_Usuario_email` ASC) VISIBLE,
   CONSTRAINT `fk_Feira_Local1`
     FOREIGN KEY (`Local_id_local` , `Local_Cidade_nome_cidade` , `Local_Cidade_Unidade_federacao_sigla`)
     REFERENCES `hubgourmet`.`Local` (`id_local` , `Cidade_nome_cidade` , `Cidade_Unidade_federacao_sigla`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Feira_Organizador1`
+    FOREIGN KEY (`Organizador_Usuario_email`)
+    REFERENCES `hubgourmet`.`Organizador` (`Usuario_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -199,12 +198,12 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Visitante`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Visitante` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário001`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  INDEX `fk_Visitante_Usuario1_idx` (`Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Visitante_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -214,21 +213,21 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Ingresso`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Ingresso` (
-  `Visitante_Usuário_id_usuário` INT NOT NULL,
-  `Feira_Organizador_Usuário_id_usuário` INT NOT NULL,
+  `numero` INT(9) ZEROFILL NOT NULL AUTO_INCREMENT,
   `Feira_nome` VARCHAR(65) NOT NULL,
-  `numero` INT(9) NOT NULL,
+  `Visitante_Usuario_email` VARCHAR(45) NOT NULL,
   `data` DATE NOT NULL,
-  PRIMARY KEY (`Visitante_Usuário_id_usuário`, `Feira_Organizador_Usuário_id_usuário`, `Feira_nome`, `numero`),
-  INDEX `fk_Ingresso_Feira1_idx` (`Feira_Organizador_Usuário_id_usuário` ASC, `Feira_nome` ASC) VISIBLE,
-  CONSTRAINT `fk_Ingresso_Visitante1`
-    FOREIGN KEY (`Visitante_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Visitante` (`Usuário_id_usuário`)
+  PRIMARY KEY (`numero`, `Feira_nome`, `Visitante_Usuario_email`),
+  INDEX `fk_Ingresso_Feira1_idx` (`Feira_nome` ASC) VISIBLE,
+  INDEX `fk_Ingresso_Visitante1_idx` (`Visitante_Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Ingresso_Feira1`
+    FOREIGN KEY (`Feira_nome`)
+    REFERENCES `hubgourmet`.`Feira` (`nome`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Ingresso_Feira1`
-    FOREIGN KEY (`Feira_Organizador_Usuário_id_usuário` , `Feira_nome`)
-    REFERENCES `hubgourmet`.`Feira` (`Organizador_Usuário_id_usuário` , `nome`)
+  CONSTRAINT `fk_Ingresso_Visitante1`
+    FOREIGN KEY (`Visitante_Usuario_email`)
+    REFERENCES `hubgourmet`.`Visitante` (`Usuario_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -238,59 +237,14 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Lista_produto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Lista_produto` (
-  `Expositor_Usuário_id_usuário` INT NOT NULL,
   `id` INT NOT NULL,
+  `Expositor_Usuario_email` VARCHAR(45) NOT NULL,
   `apelido` VARCHAR(45) NULL,
-  PRIMARY KEY (`Expositor_Usuário_id_usuário`, `id`),
+  PRIMARY KEY (`id`, `Expositor_Usuario_email`),
+  INDEX `fk_Lista_produto_Expositor1_idx` (`Expositor_Usuario_email` ASC) VISIBLE,
   CONSTRAINT `fk_Lista_produto_Expositor1`
-    FOREIGN KEY (`Expositor_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Expositor` (`Usuário_id_usuário`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `hubgourmet`.`Lista_produto_has_Produto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hubgourmet`.`Lista_produto_has_Produto` (
-  `Lista_produto_Expositor_Usuário_id_usuário` INT NOT NULL,
-  `Produto_Expositor_Usuário_id_usuário` INT NOT NULL,
-  `Produto_nome` INT NOT NULL,
-  PRIMARY KEY (`Lista_produto_Expositor_Usuário_id_usuário`, `Produto_Expositor_Usuário_id_usuário`, `Produto_nome`),
-  INDEX `fk_Lista_produto_has_Produto_Produto1_idx` (`Produto_Expositor_Usuário_id_usuário` ASC, `Produto_nome` ASC) VISIBLE,
-  INDEX `fk_Lista_produto_has_Produto_Lista_produto1_idx` (`Lista_produto_Expositor_Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Lista_produto_has_Produto_Lista_produto1`
-    FOREIGN KEY (`Lista_produto_Expositor_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Lista_produto` (`Expositor_Usuário_id_usuário`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Lista_produto_has_Produto_Produto1`
-    FOREIGN KEY (`Produto_Expositor_Usuário_id_usuário` , `Produto_nome`)
-    REFERENCES `hubgourmet`.`Produto` (`Expositor_Usuário_id_usuário` , `nome`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `hubgourmet`.`Feira_has_Lista_produto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hubgourmet`.`Feira_has_Lista_produto` (
-  `Feira_Organizador_Usuário_id_usuário` INT NOT NULL,
-  `Feira_nome` VARCHAR(65) NOT NULL,
-  `Lista_produto_Expositor_Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Feira_Organizador_Usuário_id_usuário`, `Feira_nome`, `Lista_produto_Expositor_Usuário_id_usuário`),
-  INDEX `fk_Feira_has_Lista_produto_Lista_produto1_idx` (`Lista_produto_Expositor_Usuário_id_usuário` ASC) VISIBLE,
-  INDEX `fk_Feira_has_Lista_produto_Feira1_idx` (`Feira_Organizador_Usuário_id_usuário` ASC, `Feira_nome` ASC) VISIBLE,
-  CONSTRAINT `fk_Feira_has_Lista_produto_Feira1`
-    FOREIGN KEY (`Feira_Organizador_Usuário_id_usuário` , `Feira_nome`)
-    REFERENCES `hubgourmet`.`Feira` (`Organizador_Usuário_id_usuário` , `nome`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Feira_has_Lista_produto_Lista_produto1`
-    FOREIGN KEY (`Lista_produto_Expositor_Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Lista_produto` (`Expositor_Usuário_id_usuário`)
+    FOREIGN KEY (`Expositor_Usuario_email`)
+    REFERENCES `hubgourmet`.`Expositor` (`Usuario_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -300,12 +254,59 @@ ENGINE = InnoDB;
 -- Table `hubgourmet`.`Administrador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hubgourmet`.`Administrador` (
-  `Usuário_id_usuário` INT NOT NULL,
-  PRIMARY KEY (`Usuário_id_usuário`),
-  INDEX `fk_Expositor_Usuário_idx` (`Usuário_id_usuário` ASC) VISIBLE,
-  CONSTRAINT `fk_Expositor_Usuário002`
-    FOREIGN KEY (`Usuário_id_usuário`)
-    REFERENCES `hubgourmet`.`Usuário` (`id_usuário`)
+  `Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Usuario_email`),
+  CONSTRAINT `fk_Administrador_Usuario1`
+    FOREIGN KEY (`Usuario_email`)
+    REFERENCES `hubgourmet`.`Usuario` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `hubgourmet`.`Lista_produto_has_Produto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hubgourmet`.`Lista_produto_has_Produto` (
+  `Lista_produto_id` INT NOT NULL,
+  `Lista_produto_Expositor_Usuario_email` VARCHAR(45) NOT NULL,
+  `Produto_nome` VARCHAR(45) NOT NULL,
+  `Produto_Expositor_Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Lista_produto_id`, `Lista_produto_Expositor_Usuario_email`, `Produto_nome`, `Produto_Expositor_Usuario_email`),
+  INDEX `fk_Lista_produto_has_Produto_Produto1_idx` (`Produto_nome` ASC, `Produto_Expositor_Usuario_email` ASC) VISIBLE,
+  INDEX `fk_Lista_produto_has_Produto_Lista_produto1_idx` (`Lista_produto_id` ASC, `Lista_produto_Expositor_Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Lista_produto_has_Produto_Lista_produto1`
+    FOREIGN KEY (`Lista_produto_id` , `Lista_produto_Expositor_Usuario_email`)
+    REFERENCES `hubgourmet`.`Lista_produto` (`id` , `Expositor_Usuario_email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Lista_produto_has_Produto_Produto1`
+    FOREIGN KEY (`Produto_nome` , `Produto_Expositor_Usuario_email`)
+    REFERENCES `hubgourmet`.`Produto` (`nome` , `Expositor_Usuario_email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `hubgourmet`.`Feira_has_Lista_produto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hubgourmet`.`Feira_has_Lista_produto` (
+  `Feira_nome` VARCHAR(65) NOT NULL,
+  `Feira_Organizador_Usuario_email` VARCHAR(45) NOT NULL,
+  `Lista_produto_id` INT NOT NULL,
+  `Lista_produto_Expositor_Usuario_email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Feira_nome`, `Feira_Organizador_Usuario_email`, `Lista_produto_id`, `Lista_produto_Expositor_Usuario_email`),
+  INDEX `fk_Feira_has_Lista_produto_Lista_produto1_idx` (`Lista_produto_id` ASC, `Lista_produto_Expositor_Usuario_email` ASC) VISIBLE,
+  INDEX `fk_Feira_has_Lista_produto_Feira1_idx` (`Feira_nome` ASC, `Feira_Organizador_Usuario_email` ASC) VISIBLE,
+  CONSTRAINT `fk_Feira_has_Lista_produto_Feira1`
+    FOREIGN KEY (`Feira_nome` , `Feira_Organizador_Usuario_email`)
+    REFERENCES `hubgourmet`.`Feira` (`nome` , `Organizador_Usuario_email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Feira_has_Lista_produto_Lista_produto1`
+    FOREIGN KEY (`Lista_produto_id` , `Lista_produto_Expositor_Usuario_email`)
+    REFERENCES `hubgourmet`.`Lista_produto` (`id` , `Expositor_Usuario_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
