@@ -1,2 +1,13 @@
 .artefatos/prototipo/.streamlit/secrets.toml
+.secrets.toml
 **__/pycache__/
+__pycache__/
+*.py[cod]
+
+venv/
+.env
+
+.vscode/
+.idea/
+
+*.log
