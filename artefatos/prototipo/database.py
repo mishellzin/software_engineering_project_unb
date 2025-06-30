@@ -1,10 +1,10 @@
 import mysql.connector
 import streamlit as st
 
-HOST = st.secrets["LOCALHOST"]
-USER = st.secrets["USER"]
-PASSWORD = st.secrets["PASSWORD"]
-DATABASE = st.secrets["DATABASE_NAME"]
+HOST = st.secrets["host"]
+USER = st.secrets["user"]
+PASSWORD = st.secrets["password"]
+DATABASE = st.secrets["database"]
 
 TIPO_USUARIO = {
     "ADMIN": "Administrador",
@@ -32,10 +32,6 @@ def get_connection():
     except mysql.connector.Error as err:
         print(f"Erro: {err}")
         return None
-    finally:
-        if connection and connection.is_connected():
-            connection.close()
-            print("Conexão fechada")
 
 ### -------------------------------
 ### Create entities
@@ -91,7 +87,7 @@ def inserir_unidade_federativa(nome, sigla):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO UnidadeFederativa (nome, sigla) VALUES (%s, %s)
+        INSERT INTO Unidade_federacao (nome, sigla) VALUES (%s, %s)
     """, (nome, sigla))
     conn.commit()
     conn.close()
@@ -156,6 +152,30 @@ def ler_usuario(email):
     conn.close()
     return usuario
 
+def ler_expositor(email):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Expositor WHERE email = %s", (email,))
+    expositor = cursor.fetchone()
+    conn.close()
+    return expositor
+
+def ler_organizador(email):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Organizador WHERE email = %s", (email,))
+    organizador = cursor.fetchone()
+    conn.close()
+    return organizador
+
+def ler_visitante(email):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Visitante WHERE email = %s", (email,))
+    visitante = cursor.fetchone()
+    conn.close()
+    return visitante
+
 def ler_feira(id_feira):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
@@ -183,7 +203,7 @@ def ler_ingresso(id_ingresso):
 def ler_unidade_federativa(id_uf):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM UnidadeFederativa WHERE id_uf = %s", (id_uf,))
+    cursor.execute("SELECT * FROM Unidade_federacao WHERE id_uf = %s", (id_uf,))
     uf = cursor.fetchone()
     conn.close()
     return uf
@@ -248,7 +268,7 @@ def ler_ingressos_por_usuario(email):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("""
-        SELECT * FROM Ingresso WHERE email_usuario = %s
+        SELECT * FROM Ingresso WHERE Visitante_Usuario_email = %s
     """, (email,))
     ingressos = cursor.fetchall()
     conn.close()
@@ -327,9 +347,9 @@ def atualizar_unidade_federativa(id_uf, nome=None, sigla=None):
     conn = get_connection()
     cursor = conn.cursor()
     if nome:
-        cursor.execute("UPDATE UnidadeFederativa SET nome = %s WHERE id_uf = %s", (nome, id_uf))
+        cursor.execute("UPDATE Unidade_federacao SET nome = %s WHERE id_uf = %s", (nome, id_uf))
     if sigla:
-        cursor.execute("UPDATE UnidadeFederativa SET sigla = %s WHERE id_uf = %s", (sigla, id_uf))
+        cursor.execute("UPDATE Unidade_federacao SET sigla = %s WHERE id_uf = %s", (sigla, id_uf))
     conn.commit()
     conn.close()
 
@@ -403,7 +423,7 @@ def deletar_lista_produtos(id_expositor, id_produto):
 def deletar_unidade_federativa(id_uf):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM UnidadeFederativa WHERE id_uf = %s", (id_uf,))
+    cursor.execute("DELETE FROM Unidade_federacao WHERE id_uf = %s", (id_uf,))
     conn.commit()
     conn.close()
 
@@ -425,13 +445,21 @@ def deletar_local(id_local):
 ### Read Views
 ### -------------------------------
 
-def listar_feira():
+def listar_feiras():
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM view_feiras")
     feiras = cursor.fetchall()
     conn.close()
     return feiras
+
+def listar_usuarios():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM usuario")
+    usuarios = cursor.fetchall()
+    conn.close()
+    return usuarios
 
 def listar_expositores():
     conn = get_connection()
