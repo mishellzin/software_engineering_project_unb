@@ -1,6 +1,7 @@
 .prototipo/.streamlit/secrets.toml
+*.secrets.toml
 .secrets.toml
-**__/pycache__/
+*__/pycache__/
 __pycache__/
 *.py[cod]
 
